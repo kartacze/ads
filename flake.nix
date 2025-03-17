@@ -20,8 +20,10 @@
         libnotify = pkgs.libnotify;
 
         deno = pkgs.deno;
-        python = pkgs.python314;
+        python = pkgs.python313Full;
         pip = pkgs.python313Packages.pip;
+        pytest = pkgs.python313Packages.pytest;
+
         venvShellHook = pkgs.python313Packages.venvShellHook;
 
       in {
@@ -36,6 +38,7 @@
             deno
             python
             pip
+            pytest
             venvShellHook
           ];
         };
