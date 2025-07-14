@@ -3,28 +3,28 @@ import pytest
 
 class Solution:
     def mostBooked(self, n: int, meetings: list[list[int]]) -> int:
-        occ = [0] * n
+        real_occupied = [0] * n
         result = [0] * n
         meetings_index = 0
         real_time = 0
 
         while meetings_index < len(meetings):
-            c_time = min(occ)
+            relative_min = min(real_occupied)
 
             start = meetings[meetings_index][0]
             end = meetings[meetings_index][1]
 
-            for i in range(0, len(occ)):
+            for i in range(0, len(real_occupied)):
                 print("loop")
-                room_time = occ[i]
+                room_time = real_occupied[i]
                 if start > room_time:
-                    occ[i] = end
-                if start <= room_time - c_time:
-                    occ[i] = c_time + end - start
+                    real_occupied[i] = end
+                if start <= room_time - relative_min:
+                    real_occupied[i] = relative_min + end - start
                     result[i] += 1
                     meetings_index += 1
                     break
-            print("cc ", occ, result)
+            print("cc ", real_occupied, result)
 
         print("result", result)
         result = [x for x in result if x > 0]
