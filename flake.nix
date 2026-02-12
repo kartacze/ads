@@ -3,53 +3,40 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    flake-utils = { url = "github:numtide/flake-utils"; };
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
 
-    flake-utils.lib.eachDefaultSystem (system:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs { inherit system; };
 
-        elixir = pkgs.beam.packages.erlang.elixir;
-        elixir-ls = pkgs.beam.packages.erlang.elixir-ls;
-
-        locales = pkgs.glibcLocales;
-
         node = pkgs.nodejs_22;
-        pnpm = pkgs.pnpm;
-        playwright = pkgs.playwright-test;
-        playwright-browser = pkgs.playwright-driver.browsers;
 
-        # deno = pkgs.deno;
-        python = pkgs.python313Full;
-        pip = pkgs.python313Packages.pip;
-        pytest = pkgs.python313Packages.pytest;
+        python = pkgs.python314Packages.python;
+        pip = pkgs.python314Packages.pip;
+        pytest = pkgs.python314Packages.pytest;
+        venvShellHook = pkgs.python314Packages.venvShellHook;
 
-        venvShellHook = pkgs.python313Packages.venvShellHook;
-
-        libx11 = pkgs.xorg.libX11;
-        xrandr = pkgs.xorg.libXrandr;
-
-      in {
+      in
+      {
         devShell = pkgs.mkShell {
           venvDir = ".venv";
           buildInputs = [
-            playwright
-            pkgs.playwright-driver.browsers
-
-            libx11
-            xrandr
-
-            elixir
-            locales
-            elixir-ls
             python
             pip
             pytest
             venvShellHook
-            pnpm
+            # pnpm
           ];
           shellHook = ''
             export PLAYWRIGHT_NODEJS_PATH="${node}/bin/node";
@@ -59,6 +46,7 @@
           '';
 
         };
-      });
+      }
+    );
 
 }

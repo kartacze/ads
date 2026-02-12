@@ -1,2 +1,4 @@
 /.direnv/
 .direnv/
+.direnv
+**/__pycache__/*

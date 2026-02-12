@@ -1,8 +1,10 @@
-import pytest
+from typing import Set
 
 
 class Solution:
     def divideArray(self, nums: list[int]) -> bool:
+        k: Set = set()
+
         return True
 
 
