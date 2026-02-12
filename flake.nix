@@ -16,8 +16,6 @@
         elixir-ls = pkgs.beam.packages.erlang.elixir-ls;
 
         locales = pkgs.glibcLocales;
-        inotify-tools = pkgs.inotify-tools;
-        libnotify = pkgs.libnotify;
 
         node = pkgs.nodejs_22;
         pnpm = pkgs.pnpm;
@@ -47,8 +45,6 @@
             elixir
             locales
             elixir-ls
-            inotify-tools
-            libnotify
             python
             pip
             pytest
