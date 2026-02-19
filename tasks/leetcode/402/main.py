@@ -3,30 +3,16 @@ from typing import List
 
 class Solution:
     def removeKdigits(self, num: str, k: int) -> str:
-        stack: List[str] = [num[0]]
-        removals = k
-        for val in num[1:]:
-            if removals > 0:
-                last = stack.pop()
-                if val == "0" and len(stack) == 0:
-                    stack.append(last + "0")
-                elif int(val) >= int(last):
-                    stack.append(last)
-                    stack.append(val)
-                else:
-                    stack.append(val)
-                    removals -= 1
+        s: List[str] = ["0"]
+        for number in num:
+            while k and s and number < s[-1]:
+                k -= 1
+                s.pop()
+            s.append(number)
 
-            else:
-                stack.append(val)
+        s = s[: len(s) - k]
 
-        if removals != 0:
-            stack = stack[0:-removals]
-
-        if stack == []:
-            return "0"
-
-        return "".join(stack)
+        return "".join(s).lstrip("0") or "0"
 
 
 def test_removeKdigits():
