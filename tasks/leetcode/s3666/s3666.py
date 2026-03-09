@@ -3,9 +3,7 @@ class Solution:
         def countSteps(ones_num: int, zeros_num: int, k: int, step: int) -> int:
             if zeros_num == 0:
                 return step
-            if zeros_num == k:
-                return step + 1
-            if zeros_num > k:
+            if zeros_num % k == 0:
                 full_steps = zeros_num // k
                 return countSteps(
                     ones_num + (k * full_steps),
